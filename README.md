@@ -2,15 +2,15 @@
 
 ## 📋 Table of Contents
 
-- [🚀 Introduction](-#introduction)
-- [✨ Features](-#features)
-- [🛠️ Technologies Used](-#technologies-used)
-- [⚙️ Installation](-#installation)
-- [🔧 Usage](-#usage)
-- [🏗️ Architecture](-#architecture)
-- [👥 Project Team](-#project-team)
-- [🤝 Contributing](-#contributing)
-- [📝 License](-#license)
+- [🚀 Introduction](#-introduction)
+- [✨ Features](#-features)
+- [🛠️ Technologies Used](#-technologies-used)
+- [⚙️ Installation](#-installation)
+- [🔧 Usage](#-usage)
+- [🏗️ Architecture](#-architecture)
+- [👥 Project Team](#-project-team)
+- [🤝 Contributing](#-contributing)
+- [📝 License](#-license)
 
 ## 🚀 Introduction
 
