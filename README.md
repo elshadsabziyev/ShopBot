@@ -4,10 +4,10 @@
 
 - [🚀 Introduction](#-introduction)
 - [✨ Features](#-features)
-- [🛠️ Technologies Used](#-technologies-used)
-- [⚙️ Installation](#-installation)
+- [🛠️ Technologies Used](#%EF%B8%8F-technologies-used)
+- [⚙️ Installation](#%EF%B8%8F-installation)
 - [🔧 Usage](#-usage)
-- [🏗️ Architecture](#-architecture)
+- [🏗️ Architecture](#%EF%B8%8F-architecture)
 - [👥 Project Team](#-project-team)
 - [🤝 Contributing](#-contributing)
 - [📝 License](#-license)
