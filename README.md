@@ -104,8 +104,8 @@ To set up and run this project locally, follow these steps:
   - Add visual indicators for order statuses and item picking progress.
 
 - **🔐 QR Code Token Generation for Pickup Verification**:
-  - Generate unique QR code tokens for each order placed, containing the site URL and a special token.
-  - Allow customers to access their unique QR codes through the order confirmation page for in-store pickup verification.
+   - Verification of User Presence in Store: The QR code, when scanned with the token, verifies that the user is physically present in the store.
+   - Identification of Location: It also identifies the specific location within the store where the scanning occurred.
 
 ### 🚀 Version 1.2.0
 
