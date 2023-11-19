@@ -60,7 +60,7 @@ To set up and run this project locally, follow these steps:
 
 ## 🔧 Usage
 
-1. Users place orders via the website [https://pam-project.vercel.app/](https://pam-project.vercel.app) associating each item with a unique RFID code.
+1. Users place orders via the website [https://pam-project.vercel.app/](https://shopbot-site.vercel.app) associating each item with a unique RFID code.
    (URL could be anything you set, for more info see : [⚙️ Installation](#installation) - 3)
 3. Run the Python script `main.py` to start monitoring the database for new orders.
 4. Upon detecting new orders, the Python script triggers the Arduino bot, which navigates shelves and picks items based on RFID matches.
@@ -84,10 +84,10 @@ To set up and run this project locally, follow these steps:
 
 - **Supervisor (BHOS Lecturer - Robotics)** : [Aydin Nasirzade](https://github.com/supervisor)
 - **Hardware (Arduino - Sensors)**: [Arif Najafov](https://github.com/hardware-lead)
-- **Hardware Assistant (Construction - Mechanics)**: [Nijat Aliyev](https://github.com/hardware-assistant)
-- **Sofware Project Lead (Arduino - Python)**: [Elshad Sabziyev](https://github.com/sabziyevelshad)
+- **Hardware Assistant (Construction - Mechanics)**: [Nijat Aliyev](https://github.com/nicataie)
+- **Sofware (Arduino - Python)**: [Elshad Sabziyev](https://github.com/sabziyevelshad)
 - **Front-end Developer**: [Murad Taghiyev](https://github.com/muradtaghiyev05)
-- **AI/ML Expert (Planned for future development)**: [Gurban Guliyev](https://github.com/ai-ml-expert)
+- **AI/ML Expert (Planned for future development)**: [Gurban Guliyev](https://github.com/QuriMAY)
 
 ## 🛣️ Roadmap
 
