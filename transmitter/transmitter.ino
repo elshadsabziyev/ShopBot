@@ -15,19 +15,22 @@
 // RST             D9           D8
 // 3.3V            3.3V         3.3V
 
-#define servoPin 10
-String previousUID = "0";
-String previousRFIDUID = "0";
-String fromSerialUID = "0";
-String fromRFIDUID = "0";
-String readSerialFlag = "0";
-int printCounter = 0;
-Servo myServo;
-MFRC522 card(9, 8); // SDA, RST
+#define servoPin 10 // Set servo pin 
+String previousUID = "0"; // Do not change //
+String previousRFIDUID = "0"; // Do not change //
+String fromSerialUID = "0"; // Do not change //
+String fromRFIDUID = "0"; // Do not change //
+String readSerialFlag = "0"; // Do not change //
+int printCounter = 0; // Do not change //
+int pickUpTimeout = 1500; // Set timeout for picking up item
+int serialBaudRate = 9600; // Set serial baud rate
+int optimizationDelay = 50; // Fine tune this value to optimize performance
+Servo myServo; // Do not change //
+MFRC522 card(9, 8); // SDA, RST set up for MEGA
 
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(serialBaudRate);
   SPI.begin();
   card.PCD_Init();
   card.PCD_DumpVersionToSerial();
@@ -36,30 +39,32 @@ void setup()
 
 void loop()
 {
-  // fromSerialUID = readSerial(); once it readed and lenght of it > 0 never read again until flag readSerailFlag is 1
+// Check if there is a new RFID from DB
   if (readSerialFlag == "0")
   {
+    // if there is a new RFID from DB, set flag to 1
     fromSerialUID = readSerial();
     if (fromSerialUID != "0")
     {
       readSerialFlag = "1";
     }
   }
-  delay(100);
+  delay(optimizationDelay);
   fromRFIDUID = readRFIDUID();
-  delay(100);
+  delay(optimizationDelay);
+  // if there is a new RFID from DB and RFID from RFID reader are the same
   if (fromSerialUID == fromRFIDUID && fromSerialUID != "0" && fromRFIDUID != "0")
   {
-    // pickItem();
     Serial.println("Going to pick item");
     pickItem();
-    delay(500);
+    delay(pickUpTimeout);
     // set flag to 0
     readSerialFlag = "0";
     previousUID = "0";
     previousRFIDUID = "0";
     Serial.println("Item picked and ready to get another RFID");
   }
+  // if there is a new RFID from DB and RFID from RFID reader are not the same
   else if (fromSerialUID == "0")
   {
     if (printCounter % 11 == 0)
@@ -67,6 +72,7 @@ void loop()
       Serial.println("Waiting for RFID from DB");
     }
   }
+  // if there is no new RFID from DB and RFID from RFID reader are not the same
   else if (fromRFIDUID == "0")
   {
     if (printCounter % 11 == 0)
@@ -78,9 +84,11 @@ void loop()
   {
     Serial.println("RFID from DB and RFID from RFID reader are not the same");
   }
+  // printCounter is used to print message every 10 iterations
   printCounter++;
 }
-
+ 
+ // function to read RFID from DB via serial
 String readSerial()
 {
   String fromSerialRFID = "";
@@ -108,6 +116,7 @@ String readSerial()
   return fromSerialRFIDString.length() != 0 ? fromSerialRFIDString : previousUID;
 }
 
+// function to read RFID from RFID reader
 String readRFIDUID()
 {
   String fromRFID = "";
@@ -140,12 +149,4 @@ void pickItem()
   myServo.write(90);
   delay(2000);
   myServo.write(0);
-}
-
-void lightUpOnBoardLED()
-{
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(1000);
-  digitalWrite(LED_BUILTIN, LOW);
-  delay(1000);
 }
