@@ -46,7 +46,7 @@ To set up and run this project locally, follow these steps:
    - It must be able to go staright and reverse, has RFID reader on the bottom, has some kind of arm and storage to pick and carry items and has to facilitate enough space for Raspberry Pi, Arduino and batteries.
 1. **Clone the repository**: `git clone https://github.com/your-username/order-fulfillment.git`
 2. **Front end side**:
-   - The front-end for this project has been developed and deployed. You can find detailed instructions and information about the front-end deployment in this repository: [Front-end Repository](https://github.com/muradtaghiyev05/pam-project). Please follow the instructions provided in the front-end repository for setting up, deploying, and using the front-end interface of this system. After deployment you can set custom URL to your site. 
+   - The front-end for this project has been developed and deployed. You can find detailed instructions and information about the front-end deployment in this repository: [Front-end Repository](https://github.com/elshadsabziyev/ShopBot-Webpage). (Full credit to team member [Murad Taghiyev](https://github.com/muradtaghiyev05)) Please follow the instructions provided in the front-end repository for setting up, deploying, and using the front-end interface of this system. After deployment you can set custom URL to your site. 
    - (OPTIONAL) You can develop your own front-end, connect it to any database, make required changes to `main.py` depending on this database and deploy the site.
 3. **Configure database credentials**:
    - Update the `CREDENTIALS` dictionary in the Python script with your database details.
