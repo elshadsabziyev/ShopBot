@@ -51,7 +51,7 @@ To set up and run this project locally, follow these steps:
 3. **Configure database credentials**:
    - Update the `CREDENTIALS` dictionary in the Python script with your database details.
 4. **Install necessary dependencies on Raspberry Pi and your Machine**:
-   - Python packages - Raspberryy Pi: `pip install -r requirements.txt`
+   - Python packages - Raspberry Pi: `pip install -r requirements.txt`
    - Arduino libraries - Your Machine/Raspberry Pi: Refer to the list of libraries used in the Arduino sketch and install them using the Arduino IDE's Library Manager.
 5. **Connect the Arduino**:
    - Connect it to the specified port (change `PORT` variable if necessary) and upload the Arduino sketch to the board.
@@ -85,7 +85,7 @@ To set up and run this project locally, follow these steps:
 - **Supervisor (BHOS Lecturer - Robotics)** : [Aydin Nasirzade](https://github.com/supervisor)
 - **Hardware (Arduino - Sensors)**: [Arif Najafov](https://github.com/hardware-lead)
 - **Hardware Assistant (Construction - Mechanics)**: [Nijat Aliyev](https://github.com/nicataie)
-- **Sofware (Arduino - Python)**: [Elshad Sabziyev](https://github.com/sabziyevelshad)
+- **Software (Arduino - Python)**: [Elshad Sabziyev](https://github.com/sabziyevelshad)
 - **Front-end Developer**: [Murad Taghiyev](https://github.com/muradtaghiyev05)
 - **AI/ML Expert (Planned for future development)**: [Gurban Guliyev](https://github.com/QuriMAY)
 
