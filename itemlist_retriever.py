@@ -10,6 +10,7 @@ BAUDRATE = (
     9600  # baudrate of the serial connection to the arduino, change this if needed
 )
 
+firstLoop = True  # used to check if it is the first loop of the program
 # used to store the previous items that were retrieved from the database
 # this is used to check if the items have changed during the next iteration of the loop
 prev_items = None
@@ -91,6 +92,8 @@ def main():
     prev_items = items_dict
     iter_cnt = 0
     while True:
+        if firstLoop:
+            ser.write("START".encode())
         if iter_cnt % 5 == 0 and iter_cnt != 0:
             db.conn.close()
             db = DatabaseConnection(CREDENTIALS)
