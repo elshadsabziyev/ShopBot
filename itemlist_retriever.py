@@ -1,12 +1,14 @@
 import json  # used to convert string obtained from database to a dictionary
 import time  # used to sleep the program for a certain amount of time
 from serial import Serial  # used to connect to the serial port
+from serial.tools import list_ports  # used to list all the serial ports
 import mysql.connector  # used to connect to the database
 from credentials import CREDENTIALS  # used to store the credentials for the database
+from os import name as os_name  # used to check the operating system
 
-PORT = "COM9"  # change this to the port that the arduino is connected to
-BAUDRATE = 9600  # change this to the baudrate that the serial port is using
-
+BAUDRATE = (
+    9600  # baudrate of the serial connection to the arduino, change this if needed
+)
 
 # used to store the previous items that were retrieved from the database
 # this is used to check if the items have changed during the next iteration of the loop
@@ -34,20 +36,43 @@ class DatabaseConnection:
 
 
 class SerialConnection:
-    def __init__(self, port, baudrate):
-        self.port = port
+    def __init__(self, baudrate):
+        self.port = self.find_ARDUINO_serial_port()
         self.baudrate = baudrate
-        self.ser = Serial(port, baudrate)
+        self.ser = Serial(self.port, self.baudrate)
         print("Connected to serial -- success")
 
     def write(self, data):
         self.ser.write(data.encode())
 
+    @staticmethod
+    def find_ARDUINO_serial_port():
+        if os_name == "nt":
+            for i in range(0, 256):
+                try:
+                    port = "COM" + str(i)
+                    ser = Serial(port)
+                    ser.close()
+                    return port
+                except:
+                    pass
+        elif os_name == "posix":
+            for port in range(0, 256):
+                try:
+                    port = "/dev/ttyUSB" + str(port)
+                    ser = Serial(port)
+                    ser.close()
+                    return port
+                except:
+                    pass
+        else:
+            raise Exception("Unknown OS")
+
     def read(self):
         try:
             return self.ser.readline().decode().strip()
         except:
-            return ">>>>> ERROR <<<<<"
+            return ">>>>> ERROR - Serial read failed - possible cause: serial port not connected"
 
     def close(self):
         self.ser.close()
@@ -61,7 +86,7 @@ class BotCommander:
 
 def main():
     db = DatabaseConnection(CREDENTIALS)
-    ser = SerialConnection(PORT, BAUDRATE)
+    ser = SerialConnection(BAUDRATE)
     items_dict = db.fetch_all_items()
     prev_items = items_dict
     iter_cnt = 0
