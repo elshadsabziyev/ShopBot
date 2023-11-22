@@ -82,6 +82,7 @@ void loop()
   {
     if (printCounter % 11 == 0)
     {
+      void makeStartupNoiseUsingServo();
       Serial.println("Waiting for RFID from RFID reader");
     }
   }
@@ -151,9 +152,16 @@ String readRFIDUID()
 
 void pickItem()
 {
-  myServo.write(90);
-  delay(2000);
-  myServo.write(0);
+  for (int i = 0; i <= 150; i += 10)
+  {
+    myServo.write(i);
+    delay(100);
+  }
+  for (int i = 150; i >= 0; i -= 10)
+  {
+    myServo.write(i);
+    delay(100);
+  }
 }
 
 void makeStartupNoiseUsingServo()
@@ -166,11 +174,4 @@ void makeStartupNoiseUsingServo()
   delay(100);
   myServo.write(0);
   delay(100);
-  myServo.write(90);
-  delay(100);
-  myServo.write(0);
-  delay(100);
-  myServo.write(90);
-  delay(100);
-  myServo.write(0);
 }

@@ -1,7 +1,6 @@
 import json  # used to convert string obtained from database to a dictionary
 import time  # used to sleep the program for a certain amount of time
 from serial import Serial  # used to connect to the serial port
-from serial.tools import list_ports  # used to list all the serial ports
 import mysql.connector  # used to connect to the database
 from credentials import CREDENTIALS  # used to store the credentials for the database
 from os import name as os_name  # used to check the operating system
@@ -10,7 +9,6 @@ BAUDRATE = (
     9600  # baudrate of the serial connection to the arduino, change this if needed
 )
 
-firstLoop = True  # used to check if it is the first loop of the program
 # used to store the previous items that were retrieved from the database
 # this is used to check if the items have changed during the next iteration of the loop
 prev_items = None
@@ -79,12 +77,6 @@ class SerialConnection:
         self.ser.close()
 
 
-class BotCommander:
-    def __init__(self, db, ser):
-        self.db = db
-        self.ser = ser
-
-
 def main():
     db = DatabaseConnection(CREDENTIALS)
     ser = SerialConnection(BAUDRATE)
@@ -92,8 +84,6 @@ def main():
     prev_items = items_dict
     iter_cnt = 0
     while True:
-        if firstLoop:
-            ser.write("START".encode())
         if iter_cnt % 5 == 0 and iter_cnt != 0:
             db.conn.close()
             db = DatabaseConnection(CREDENTIALS)
