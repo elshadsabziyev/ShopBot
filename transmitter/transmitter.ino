@@ -15,18 +15,18 @@
 // RST             D9           D8
 // 3.3V            3.3V         3.3V
 
-#define servoPin 10 // Set servo pin 
-String previousUID = "0"; // Do not change //
+#define servoPin 8            // Set servo pin
+String previousUID = "0";     // Do not change //
 String previousRFIDUID = "0"; // Do not change //
-String fromSerialUID = "0"; // Do not change //
-String fromRFIDUID = "0"; // Do not change //
-String readSerialFlag = "0"; // Do not change //
-int printCounter = 0; // Do not change //
-int pickUpTimeout = 1500; // Set timeout for picking up item
-int serialBaudRate = 9600; // Set serial baud rate
-int optimizationDelay = 50; // Fine tune this value to optimize performance
-Servo myServo; // Do not change //
-MFRC522 card(9, 8); // SDA, RST set up for MEGA
+String fromSerialUID = "0";   // Do not change //
+String fromRFIDUID = "0";     // Do not change //
+String readSerialFlag = "0";  // Do not change //
+int printCounter = 0;         // Do not change //
+int pickUpTimeout = 1500;     // Set timeout for picking up item
+int serialBaudRate = 9600;    // Set serial baud rate
+int optimizationDelay = 50;   // Fine tune this value to optimize performance
+Servo myServo;                // Do not change //
+MFRC522 card(10, 9);          // SDA, RST set up for MEGA
 
 void setup()
 {
@@ -39,7 +39,7 @@ void setup()
 
 void loop()
 {
-// Check if there is a new RFID from DB
+  // Check if there is a new RFID from DB
   if (readSerialFlag == "0")
   {
     // if there is a new RFID from DB, set flag to 1
@@ -87,8 +87,8 @@ void loop()
   // printCounter is used to print message every 10 iterations
   printCounter++;
 }
- 
- // function to read RFID from DB via serial
+
+// function to read RFID from DB via serial
 String readSerial()
 {
   String fromSerialRFID = "";
