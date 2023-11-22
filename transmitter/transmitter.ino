@@ -25,6 +25,7 @@ int printCounter = 0;         // Do not change //
 int pickUpTimeout = 1500;     // Set timeout for picking up item
 int serialBaudRate = 9600;    // Set serial baud rate
 int optimizationDelay = 50;   // Fine tune this value to optimize performance
+int firstMainLoop = 1;        // Do not change //
 Servo myServo;                // Do not change //
 MFRC522 card(10, 9);          // SDA, RST set up for MEGA
 
@@ -39,7 +40,11 @@ void setup()
 
 void loop()
 {
-  // Check if there is a new RFID from DB
+  if (firstMainLoop == 1)
+  {
+    makeStartupNoiseUsingServo();
+    firstMainLoop = 0;
+  }
   if (readSerialFlag == "0")
   {
     // if there is a new RFID from DB, set flag to 1
@@ -148,5 +153,24 @@ void pickItem()
 {
   myServo.write(90);
   delay(2000);
+  myServo.write(0);
+}
+
+void makeStartupNoiseUsingServo()
+{
+  myServo.write(90);
+  delay(100);
+  myServo.write(0);
+  delay(100);
+  myServo.write(90);
+  delay(100);
+  myServo.write(0);
+  delay(100);
+  myServo.write(90);
+  delay(100);
+  myServo.write(0);
+  delay(100);
+  myServo.write(90);
+  delay(100);
   myServo.write(0);
 }
