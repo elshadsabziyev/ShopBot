@@ -15,7 +15,7 @@
 // RST             D9           D8
 // 3.3V            3.3V         3.3V
 
-#define servoPin 6            // Set servo pin
+#define servoPin 3            // Set servo pin
 String previousUID = "0";     // Do not change //
 String previousRFIDUID = "0"; // Do not change //
 String fromSerialUID = "0";   // Do not change //
@@ -29,11 +29,11 @@ int firstMainLoop = 1;        // Do not change //
 Servo myServo;                // Do not change //
 MFRC522 card(10, 9);          // SDA, RST set up for MEGA
 int motor1pin1 = 2;           // pin 2 on L293D
-int motor1pin2 = 3;           // pin 7 on L293D
-int motor2pin1 = 4;           // pin 10 on L293D
-int motor2pin2 = 5;           // pin 15 on L293D
-int enable1pin = 6;           // pin 1 on L293D
-int enable2pin = 7;           // pin 9 on L293D
+int motor1pin2 = 4;           // pin 7 on L293D
+int motor2pin1 = 7;           // pin 10 on L293D
+int motor2pin2 = 8;           // pin 15 on L293D
+int enable1pin = 5;           // pin 1 on L293D
+int enable2pin = 6;           // pin 9 on L293D
 
 void setup()
 {
@@ -66,6 +66,7 @@ void loop()
     if (fromSerialUID != "0")
     {
       readSerialFlag = "1";
+      moveForward();
     }
   }
   delay(optimizationDelay);
