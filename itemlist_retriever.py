@@ -1,7 +1,6 @@
 import json  # used to convert string obtained from database to a dictionary
 import time  # used to sleep the program for a certain amount of time
 from serial import Serial  # used to connect to the serial port
-from serial.tools import list_ports  # used to list all the serial ports
 import mysql.connector  # used to connect to the database
 from credentials import CREDENTIALS  # used to store the credentials for the database
 from os import name as os_name  # used to check the operating system
@@ -76,12 +75,6 @@ class SerialConnection:
 
     def close(self):
         self.ser.close()
-
-
-class BotCommander:
-    def __init__(self, db, ser):
-        self.db = db
-        self.ser = ser
 
 
 def main():
