@@ -46,12 +46,12 @@ To set up and run this project locally, follow these steps:
    - It must be able to go staright and reverse, has RFID reader on the bottom, has some kind of arm and storage to pick and carry items and has to facilitate enough space for Raspberry Pi, Arduino and batteries.
 1. **Clone the repository**: `git clone https://github.com/your-username/order-fulfillment.git`
 2. **Front end side**:
-   - The front-end for this project has been developed and deployed. You can find detailed instructions and information about the front-end deployment in this repository: [Front-end Repository](https://github.com/muradtaghiyev05/pam-project). Please follow the instructions provided in the front-end repository for setting up, deploying, and using the front-end interface of this system. After deployment you can set custom URL to your site. 
+   - The front-end for this project has been developed and deployed. You can find detailed instructions and information about the front-end deployment in this repository: [Front-end Repository](https://github.com/elshadsabziyev/ShopBot-Webpage). (Full credit to team member [Murad Taghiyev](https://github.com/muradtaghiyev05)) Please follow the instructions provided in the front-end repository for setting up, deploying, and using the front-end interface of this system. After deployment you can set custom URL to your site. 
    - (OPTIONAL) You can develop your own front-end, connect it to any database, make required changes to `main.py` depending on this database and deploy the site.
 3. **Configure database credentials**:
    - Update the `CREDENTIALS` dictionary in the Python script with your database details.
 4. **Install necessary dependencies on Raspberry Pi and your Machine**:
-   - Python packages - Raspberryy Pi: `pip install -r requirements.txt`
+   - Python packages - Raspberry Pi: `pip install -r requirements.txt`
    - Arduino libraries - Your Machine/Raspberry Pi: Refer to the list of libraries used in the Arduino sketch and install them using the Arduino IDE's Library Manager.
 5. **Connect the Arduino**:
    - Connect it to the specified port (change `PORT` variable if necessary) and upload the Arduino sketch to the board.
@@ -60,7 +60,7 @@ To set up and run this project locally, follow these steps:
 
 ## 🔧 Usage
 
-1. Users place orders via the website [https://pam-project.vercel.app/](https://pam-project.vercel.app) associating each item with a unique RFID code.
+1. Users place orders via the website [https://pam-project.vercel.app/](https://shopbot-site.vercel.app) associating each item with a unique RFID code.
    (URL could be anything you set, for more info see : [⚙️ Installation](#installation) - 3)
 3. Run the Python script `main.py` to start monitoring the database for new orders.
 4. Upon detecting new orders, the Python script triggers the Arduino bot, which navigates shelves and picks items based on RFID matches.
@@ -84,10 +84,10 @@ To set up and run this project locally, follow these steps:
 
 - **Supervisor (BHOS Lecturer - Robotics)** : [Aydin Nasirzade](https://github.com/supervisor)
 - **Hardware (Arduino - Sensors)**: [Arif Najafov](https://github.com/hardware-lead)
-- **Hardware Assistant (Construction - Mechanics)**: [Nijat Aliyev](https://github.com/hardware-assistant)
-- **Sofware Project Lead (Arduino - Python)**: [Elshad Sabziyev](https://github.com/sabziyevelshad)
+- **Hardware Assistant (Construction - Mechanics)**: [Nijat Aliyev](https://github.com/nicataie)
+- **Software (Arduino - Python)**: [Elshad Sabziyev](https://github.com/sabziyevelshad)
 - **Front-end Developer**: [Murad Taghiyev](https://github.com/muradtaghiyev05)
-- **AI/ML Expert (Planned for future development)**: [Gurban Guliyev](https://github.com/ai-ml-expert)
+- **AI/ML Expert (Planned for future development)**: [Gurban Guliyev](https://github.com/QuriMAY)
 
 ## 🛣️ Roadmap
 
@@ -104,8 +104,8 @@ To set up and run this project locally, follow these steps:
   - Add visual indicators for order statuses and item picking progress.
 
 - **🔐 QR Code Token Generation for Pickup Verification**:
-  - Generate unique QR code tokens for each order placed, containing the site URL and a special token.
-  - Allow customers to access their unique QR codes through the order confirmation page for in-store pickup verification.
+   - Verification of User Presence in Store: The QR code, when scanned with the token, verifies that the user is physically present in the store.
+   - Identification of Location: It also identifies the specific location within the store where the scanning occurred.
 
 ### 🚀 Version 1.2.0
 
