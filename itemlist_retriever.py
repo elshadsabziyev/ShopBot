@@ -9,6 +9,7 @@ BAUDRATE = (
     9600  # baudrate of the serial connection to the arduino, change this if needed
 )
 
+
 # used to store the previous items that were retrieved from the database
 # this is used to check if the items have changed during the next iteration of the loop
 prev_items = None
@@ -51,27 +52,28 @@ class SerialConnection:
                 try:
                     port = "COM" + str(i)
                     ser = Serial(port)
-                    ser.close()
                     return port
                 except:
                     pass
         elif os_name == "posix":
-            for port in range(0, 256):
-                try:
-                    port = "/dev/ttyUSB" + str(port)
-                    ser = Serial(port)
-                    ser.close()
-                    return port
-                except:
-                    pass
+            for port_num in range(0, 256):
+                for port_prefix in ["/dev/ttyUSB", "/dev/ttyACM"]:
+                    try:
+                        port = port_prefix + str(port_num)
+                        ser = Serial(port)
+                        ser.close()
+                        return port
+                    except:
+                        pass
+
         else:
             raise Exception("Unknown OS")
 
     def read(self):
         try:
             return self.ser.readline().decode().strip()
-        except:
-            return ">>>>> ERROR - Serial read failed - possible cause: serial port not connected"
+        except Exception as e:
+            print(e)
 
     def close(self):
         self.ser.close()
