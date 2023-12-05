@@ -4,7 +4,7 @@
 #include <require_cpp11.h>
 #include <SPI.h>
 #include <Servo.h>
-
+  
 // RC522 MODULE    Uno/Nano     MEGA
 // SDA             D10          D9
 // SCK             D13          D52
@@ -22,7 +22,7 @@ String fromSerialUID = "0";   // Do not change //
 String fromRFIDUID = "0";     // Do not change //
 String readSerialFlag = "0";  // Do not change //
 int printCounter = 0;         // Do not change //
-int pickUpTimeout = 1500;     // Set timeout for picking up item
+int pickUpTimeout = 1500;     // Set timeout for picking up item  
 int serialBaudRate = 9600;    // Set serial baud rate
 int optimizationDelay = 50;   // Fine tune this value to optimize performance
 int firstMainLoop = 1;        // Do not change //
@@ -179,17 +179,23 @@ void pickItem()
   digitalWrite(motor1pin2, LOW);
   digitalWrite(motor2pin1, LOW);
   digitalWrite(motor2pin2, LOW);
-  delay(4000);
-  for (int i = 0; i <= 150; i += 45)
+  delay(2000);
+  for (int i = 0; i <= 150; i += 30)
   {
     myServo.write(i);
     delay(50);
   }
-  for (int i = 150; i >= 0; i -= 45)
+  delay(2000);
+  for (int i = 150; i >= 0; i -= 30)
   {
     myServo.write(i);
     delay(50);
   }
+  digitalWrite(motor1pin1, LOW);
+  digitalWrite(motor1pin2, LOW);
+  digitalWrite(motor2pin1, LOW);
+  digitalWrite(motor2pin2, LOW);
+  delay(2000);
   digitalWrite(motor1pin1, LOW);
   digitalWrite(motor1pin2, HIGH);
   digitalWrite(motor2pin1, LOW);

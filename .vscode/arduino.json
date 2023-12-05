@@ -1,6 +1,5 @@
 {
     "board": "arduino:avr:uno",
     "programmer": "avrisp",
-    "port": "COM9",
     "sketch": "transmitter\\transmitter.ino"
 }
