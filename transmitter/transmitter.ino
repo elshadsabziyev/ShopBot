@@ -19,21 +19,22 @@
 String previousUID = "0";     // Do not change //
 String previousRFIDUID = "0"; // Do not change //
 String fromSerialUID = "0";   // Do not change //
-String fromRFIDUID = "0";     // Do not change //
-String readSerialFlag = "0";  // Do not change //
-int printCounter = 0;         // Do not change //
-int pickUpTimeout = 1500;     // Set timeout for picking up item
-int serialBaudRate = 9600;    // Set serial baud rate
-int optimizationDelay = 50;   // Fine tune this value to optimize performance
-int firstMainLoop = 1;        // Do not change //
-Servo myServo;                // Do not change //
-MFRC522 card(10, 9);          // SDA, RST set up for MEGA
-int motor1pin1 = 2;           // pin 2 on L293D
-int motor1pin2 = 4;           // pin 7 on L293D
-int motor2pin1 = 7;           // pin 10 on L293D
-int motor2pin2 = 8;           // pin 15 on L293D
-int enable1pin = 5;           // pin 1 on L293D
-int enable2pin = 6;           // pin 9 on L293D
+String stopRFID = "4475a389";
+String fromRFIDUID = "0";    // Do not change //
+String readSerialFlag = "0"; // Do not change //
+int printCounter = 0;        // Do not change //
+int pickUpTimeout = 1500;    // Set timeout for picking up item
+int serialBaudRate = 9600;   // Set serial baud rate
+int optimizationDelay = 50;  // Fine tune this value to optimize performance
+int firstMainLoop = 1;       // Do not change //
+Servo myServo;               // Do not change //
+MFRC522 card(10, 9);         // SDA, RST set up for MEGA
+int motor1pin1 = 2;          // pin 2 on L293D
+int motor1pin2 = 4;          // pin 7 on L293D
+int motor2pin1 = 7;          // pin 10 on L293D
+int motor2pin2 = 8;          // pin 15 on L293D
+int enable1pin = 5;          // pin 1 on L293D
+int enable2pin = 6;          // pin 9 on L293D
 
 void setup()
 {
@@ -48,12 +49,13 @@ void setup()
   pinMode(motor2pin2, OUTPUT);
   pinMode(enable1pin, OUTPUT);
   pinMode(enable2pin, OUTPUT);
-  analogWrite(enable1pin, 150);
-  analogWrite(enable2pin, 150);
+  analogWrite(enable1pin, 200);
+  analogWrite(enable2pin, 200);
 }
 
 void loop()
 {
+  // stop if no RFID is present from DB
   if (firstMainLoop == 1)
   {
     makeStartupNoiseUsingServo();
@@ -69,6 +71,19 @@ void loop()
       moveForward();
     }
   }
+  if (readSerialFlag == "2")
+  {
+    while (readRFIDUID() != stopRFID)
+    {
+      moveBackward();
+    }
+    digitalWrite(motor1pin1, LOW);
+    digitalWrite(motor1pin2, LOW);
+    digitalWrite(motor2pin1, LOW);
+    digitalWrite(motor2pin2, LOW);
+    delay(1000);
+    readSerialFlag = "0";
+  }
   delay(optimizationDelay);
   fromRFIDUID = readRFIDUID();
   delay(optimizationDelay);
@@ -79,10 +94,9 @@ void loop()
     pickItem();
     delay(pickUpTimeout);
     // set flag to 0
-    readSerialFlag = "0";
+    readSerialFlag = "2";
     previousUID = "0";
     previousRFIDUID = "0";
-    Serial.println("Item picked and ready to get another RFID");
   }
   // if there is a new RFID from DB and RFID from RFID reader are not the same
   else if (fromSerialUID == "0")
@@ -173,22 +187,31 @@ void moveForward()
   digitalWrite(motor2pin2, LOW);
 }
 
+void moveBackward()
+{
+  digitalWrite(motor1pin1, LOW);
+  digitalWrite(motor1pin2, HIGH);
+  digitalWrite(motor2pin1, LOW);
+  digitalWrite(motor2pin2, HIGH);
+}
+
 void pickItem()
 {
   digitalWrite(motor1pin1, LOW);
   digitalWrite(motor1pin2, LOW);
   digitalWrite(motor2pin1, LOW);
   digitalWrite(motor2pin2, LOW);
-  delay(4000);
-  for (int i = 0; i <= 150; i += 45)
+  delay(2000);
+  for (int i = 0; i <= 120; i += 30)
   {
     myServo.write(i);
-    delay(50);
+    delay(100);
   }
-  for (int i = 150; i >= 0; i -= 45)
+  delay(2000);
+  for (int i = 120; i >= 0; i -= 30)
   {
     myServo.write(i);
-    delay(50);
+    delay(100);
   }
   digitalWrite(motor1pin1, LOW);
   digitalWrite(motor1pin2, HIGH);
@@ -206,4 +229,12 @@ void makeStartupNoiseUsingServo()
   delay(100);
   myServo.write(0);
   delay(100);
+}
+
+void stop()
+{
+  digitalWrite(motor1pin1, LOW);
+  digitalWrite(motor1pin2, LOW);
+  digitalWrite(motor2pin1, LOW);
+  digitalWrite(motor2pin2, LOW);
 }

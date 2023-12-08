@@ -64,7 +64,7 @@ class SerialConnection:
                         ser.close()
                         return port
                     except:
-                        pass
+                        print("OS: " + os_name + " Port: " + port + " not found\nTrying next port...")
 
         else:
             raise Exception("Unknown OS")
@@ -97,10 +97,14 @@ def main():
             )
             to_write = items_dict[max(items_dict.keys())][0].lower() + "\n"
             prev_items = items_dict
-            ser.write(to_write)
+            ser.write(to_write)``
         else:
             print("Items not changed")
-        print("Reading from serial... :" + ser.read())
+        try:
+            print("Reading from serial... :" + ser.read())
+        except: 
+            print("Error reading from serial")
+            
         iter_cnt += 1
         time.sleep(0.1)
 
