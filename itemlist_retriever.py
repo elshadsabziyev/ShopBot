@@ -97,7 +97,7 @@ def main():
             )
             to_write = items_dict[max(items_dict.keys())][0].lower() + "\n"
             prev_items = items_dict
-            ser.write(to_write)``
+            ser.write(to_write)
         else:
             print("Items not changed")
         try:
